@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Online Store
 
-## Getting Started
+Description
+A multi-page online store with a product catalog, cart, favorites, and user account. Features user authentication, logout, and password recovery via Telegram bot. Products can be filtered, sorted, and paginated.
 
-First, run the development server:
+Features
 
-```bash
+User authentication: signup, login, logout
+
+Product catalog with filtering, sorting, and pagination
+
+Add products to favorites and cart
+
+User account with order history
+
+Password recovery via Telegram bot
+
+Technologies
+
+Frontend: Next.js, TypeScript, Tailwind CSS
+
+Backend: Node.js, Express, TypeScript, REST API
+
+Database: MongoDB
+
+Integration: Telegram bot for password recovery
+
+Local Setup
+
+Clone the repository:
+
+git clone <repository_url>
+
+
+Install dependencies for frontend and backend:
+
+npm install
+
+
+Configure environment variables for MongoDB and Telegram bot.
+
+Start the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open in your browser: http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Project Structure
 
-## Learn More
+/frontend – Next.js + Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+/backend – Node.js + Express + REST API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/models – MongoDB models
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+/routes – API routes
 
-## Deploy on Vercel
+/components – UI components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Highlights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fully responsive interface (mobile, tablet, desktop)
+
+Clean and modern UI
+
+Core e-commerce functionality implemented
