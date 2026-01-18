@@ -24,7 +24,7 @@ async function ProductsPage() {
         initialSearch,
         initialPage,
         initialCategory,
-        initialSortBy
+        initialSortBy,
       ),
   });
   return (

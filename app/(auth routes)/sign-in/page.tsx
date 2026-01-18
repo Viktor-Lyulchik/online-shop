@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { useAuthStore } from "@/lib/store/authStore";
@@ -10,8 +10,15 @@ import { ApiError, LoginRequest } from "@/types/auth";
 function SignInForm() {
   const searchParams = useSearchParams();
   const [error, setError] = useState("");
+  const [redirect, setRedirect] = useState<string | null>(null);
   const setUser = useAuthStore((state) => state.setUser);
   const redirectUrl = searchParams.get("redirect");
+
+  useEffect(() => {
+    if (redirect) {
+      window.location.href = redirect;
+    }
+  }, [redirect]);
 
   const handleSubmit = async (formData: FormData) => {
     try {
@@ -20,7 +27,7 @@ function SignInForm() {
 
       if (res) {
         setUser(res);
-        window.location.href = redirectUrl || "/profile";
+        setRedirect(redirectUrl || "/profile");
       } else {
         setError("Invalid email or password");
       }
@@ -30,7 +37,7 @@ function SignInForm() {
         setError("Invalid email or password");
       } else {
         setError(
-          error.response?.data?.error ?? error.message ?? "Oops... some error"
+          error.response?.data?.error ?? error.message ?? "Oops... some error",
         );
       }
     }
@@ -48,7 +55,6 @@ function SignInForm() {
 
       <form
         className="space-y-5"
-        action={handleSubmit}
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);

@@ -5,42 +5,28 @@ import { Product } from "@/types/products";
 import { Heart, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState, useLayoutEffect } from "react";
+import { useState } from "react";
 
 interface ProductsGridInt {
   products: Product[];
 }
 
 export default function ProductsGrid({ products }: ProductsGridInt) {
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Store methods
+  const [isHydrated] = useState(() => typeof window !== "undefined");
   const addToFavorites = useShopStore((state) => state.addToFavorites);
   const removeFromFavorites = useShopStore(
-    (state) => state.removeFromFavorites
+    (state) => state.removeFromFavorites,
   );
   const addToCart = useShopStore((state) => state.addToCart);
   const removeFromCart = useShopStore((state) => state.removeFromCart);
-  
-  // Get the entire favorites and cart arrays to trigger re-renders
   const favorites = useShopStore((state) => state.favorites);
   const cart = useShopStore((state) => state.cart);
-
   const router = useRouter();
 
-  // Use useLayoutEffect to set hydration state before paint
-  useLayoutEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  // Helper functions that check if product is in favorites/cart
-  const isFavorite = (productId: string) => {
-    return favorites.some((item) => item._id === productId);
-  };
-
-  const isInCart = (productId: string) => {
-    return cart.some((item) => item._id === productId);
-  };
+  const isFavorite = (productId: string) =>
+    favorites.some((item) => item._id === productId);
+  const isInCart = (productId: string) =>
+    cart.some((item) => item._id === productId);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -86,7 +72,7 @@ export default function ProductsGrid({ products }: ProductsGridInt) {
                     : "Add to favourites"
                 }
                 className="flex justify-center items-center h-[30px] w-[80px] rounded-lg 
-                  border border-red-400 bg-gradient-to-b from-white to-red-50 
+                  border border-red-400 bg-linear-to-b from-white to-red-50 
                   shadow-md hover:shadow-lg hover:from-red-50 hover:to-white
                   active:scale-95 transition-all duration-200"
                 onClick={(e) => {
@@ -107,12 +93,10 @@ export default function ProductsGrid({ products }: ProductsGridInt) {
 
               <button
                 aria-label={
-                  productIsInCart
-                    ? "Remove from basket" 
-                    : "Add to basket"
+                  productIsInCart ? "Remove from basket" : "Add to basket"
                 }
                 className="flex justify-center items-center h-[30px] w-[80px] rounded-lg 
-                  border border-red-400 bg-gradient-to-b from-white to-red-50 
+                  border border-red-400 bg-linear-to-b from-white to-red-50 
                   shadow-md hover:shadow-lg hover:from-red-50 hover:to-white
                   active:scale-95 transition-all duration-200"
                 onClick={(e) => {
